@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!--
+Portage by pvrz
+https://github.com/pvrzz/Portage/
+File Name: index.html
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portage — A universal browser data swap</title>
+  <meta name="description" content="Export your bookmarks, history, cookies, tabs, sessions and reading list to one encrypted, portable file — then import into any browser. Chrome, Firefox, both ways.">
+  <meta property="og:title" content="Portage — A universal browser data swap">
+  <meta property="og:description" content="Carry your browser data anywhere. Encrypted, local-only, open source.">
+  <meta property="og:image" content="media/og.png">
+  <meta name="theme-color" content="#18181b">
+  <link rel="icon" href="media/logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="site.js"></script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 18V6"/><path d="m4 10 4-4 4 4"/><path d="M16 6v12"/><path d="m12 14 4 4 4-4"/></svg></span>
+        Portage
+      </a>
+      <div class="links">
+        <a class="navlink" href="#features">Features</a>
+        <a class="navlink" href="#screens">Screenshots</a>
+        <a class="navlink" href="#matrix">What transfers</a>
+        <a href="https://github.com/pvrzz/Portage/" target="_blank" rel="noopener" class="navlink">GitHub</a>
+        <a class="cta" href="download.html">Download</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="glow"></div>
+    <div class="wrap">
+      <span class="eyebrow reveal"><span class="dot"></span> Open source · v2.0 · Chrome &amp; Firefox</span>
+      <h1 class="reveal">Carry your browser data <span class="grad">anywhere.</span></h1>
+      <p class="lead reveal">Portage gathers your bookmarks, history, cookies, tabs, sessions and reading list into one encrypted, portable file — then rebuilds it in any browser. Chrome → Firefox, Firefox → Chrome, or the same browser on a new machine.</p>
+      <div class="cta-row reveal">
+        <a class="btn btn-primary btn-lg" href="download.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          Download Portage
+        </a>
+        <a class="btn btn-ghost btn-lg" href="https://github.com/pvrzz/Portage/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.52 11.52 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          View source
+        </a>
+      </div>
+      <div class="trust reveal">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> AES-256 encrypted</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg> 100% local</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg> Both directions</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> No tracking</span>
+      </div>
+
+      <div class="frame float reveal">
+        <div class="bar"><i></i><i></i><i></i><span class="addr">portage · export</span></div>
+        <img src="media/shot-export.png" alt="Portage export screen showing data categories">
+      </div>
+    </div>
+  </header>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="tag">Why Portage</div>
+        <h2>Everything that matters, nothing that doesn't</h2>
+        <p>Built on the official browser APIs — so it only ever touches data it can actually move, and never pretends otherwise.</p>
+      </div>
+      <div class="features">
+        <div class="feature reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <h3>Universal swap</h3>
+          <p>It's just JSON, so it doesn't care who made it. Chrome ↔ Firefox, or the same browser on a new machine, profile or reinstall.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <h3>Top-tier encryption</h3>
+          <p>Optional AES-256-GCM with PBKDF2 key derivation. Your bundle — cookies and all — is unreadable on disk without your passphrase.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div>
+          <h3>The whole picture</h3>
+          <p>Bookmarks, history, cookies, open tabs, recently closed sessions and your reading list — recreated faithfully on the other side.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg></div>
+          <h3>Reinstall checklist</h3>
+          <p>No API can reinstall extensions, so Portage exports them as a tidy <code>.txt</code> with store-search links for both browsers — perfect for an AI assistant.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20z" fill="currentColor" stroke="none"/></svg></div>
+          <h3>Themeable, readable</h3>
+          <p>Monochrome by default, with light/dark and any accent colour you like. The palette auto-adjusts to keep text crisp and legible.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg></div>
+          <h3>Private by design</h3>
+          <p>Nothing is uploaded, ever. Data lives only in the page while you work and is wiped from memory the moment you export or import.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="screens" style="background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="tag">A closer look</div>
+        <h2>Designed to feel effortless</h2>
+        <p>Animated progress, live counts and honest status on every category — so you always know exactly what's moving.</p>
+      </div>
+      <div class="shots">
+        <div class="shot reveal">
+          <div class="shot-copy">
+            <h3>Scan &amp; export</h3>
+            <p>One click scans your browser and lays out everything Portage can carry. Toggle off anything you'd rather leave behind, encrypt it, and save a single portable file.</p>
+            <div class="chips"><span class="chip">Live progress</span><span class="chip">Bundle size</span><span class="chip">Selective export</span></div>
+          </div>
+          <div class="frame">
+            <div class="bar"><i></i><i></i><i></i><span class="addr">portage · export</span></div>
+            <img src="media/shot-export.png" alt="Portage export screen">
+          </div>
+        </div>
+        <div class="shot reveal">
+          <div class="shot-copy">
+            <h3>Drop &amp; import</h3>
+            <p>Open Portage in the destination browser, drop the file in, and it recreates your data through the official APIs. Encrypted bundles simply ask for your passphrase first.</p>
+            <div class="chips"><span class="chip">Drag &amp; drop</span><span class="chip">Per-category status</span><span class="chip">Imported / skipped tally</span></div>
+          </div>
+          <div class="frame">
+            <div class="bar"><i></i><i></i><i></i><span class="addr">portage · import</span></div>
+            <img src="media/shot-import.png" alt="Portage import screen">
+          </div>
+        </div>
+        <div class="shot reveal">
+          <div class="shot-copy">
+            <h3>Right from your toolbar</h3>
+            <p>A compact popup shows live counts at a glance and opens the full workspace in a click. Themed to match the rest of Portage, in light or dark.</p>
+            <div class="chips"><span class="chip">Quick counts</span><span class="chip">One-click open</span></div>
+          </div>
+          <div class="frame" style="max-width:340px;justify-self:center;">
+            <div class="bar"><i></i><i></i><i></i><span class="addr">popup</span></div>
+            <img src="media/shot-popup.png" alt="Portage toolbar popup">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="matrix">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="tag">Honest by default</div>
+        <h2>What actually transfers</h2>
+        <p>Extensions can only use the browser APIs — so this is everything Portage moves, and exactly how.</p>
+      </div>
+      <div class="table-card reveal">
+        <table class="matrix">
+          <thead><tr><th>Data</th><th class="c">Export</th><th>On import</th></tr></thead>
+          <tbody>
+            <tr><td>Bookmarks</td><td class="c yes">Full tree</td><td>Recreated in a “Portage Import” folder</td></tr>
+            <tr><td>History</td><td class="c yes">Yes</td><td>Re-added — Firefox keeps titles &amp; times</td></tr>
+            <tr><td>Cookies</td><td class="c yes">Yes</td><td>Re-set, so logins carry over</td></tr>
+            <tr><td>Open tabs</td><td class="c yes">Yes</td><td>Reopened in the window</td></tr>
+            <tr><td>Recently closed</td><td class="c yes">Yes</td><td>Reopened as tabs</td></tr>
+            <tr><td>Reading list</td><td class="c yes">Yes</td><td>Chrome → reading list · Firefox → bookmark folder</td></tr>
+            <tr><td>Extensions</td><td class="c yes">List</td><td><span class="no">Checklist only</span> — no API can reinstall them</td></tr>
+            <tr><td>Passwords &amp; autofill</td><td class="c no">—</td><td><span class="no">No browser API exists — use the built-in export</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div class="glow"></div>
+        <h2>Ready to move your data?</h2>
+        <p>Free, open source, and entirely on your machine. Install Portage in under a minute.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg" href="download.html">Download for Chrome &amp; Firefox</a>
+          <a class="btn btn-ghost btn-lg" href="https://github.com/pvrzz/Portage/" target="_blank" rel="noopener">Star on GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="foot-inner">
+      <a class="brand" href="index.html">
+        <span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 18V6"/><path d="m4 10 4-4 4 4"/><path d="M16 6v12"/><path d="m12 14 4 4 4-4"/></svg></span>
+        Portage
+      </a>
+      <div class="spacer"></div>
+      <div class="links2">
+        <a href="download.html">Download</a>
+        <a href="https://github.com/pvrzz/Portage/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/pvrzz/Portage/releases" target="_blank" rel="noopener">Releases</a>
+      </div>
+      <span class="made">made by <a href="https://pvrz.lol/" target="_blank" rel="noopener">pvrz</a> <span class="heart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></span></span>
+    </div>
+  </footer>
+</body>
+</html>
