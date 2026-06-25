@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--
+Portage by pvrz
+https://github.com/pvrzz/Portage/
+File Name: privacy.html
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portage's privacy policy. Portage runs entirely on your device — no data collection, no analytics, no remote servers.">
+  <title>Portage — Privacy Policy</title>
+  <meta name="theme-color" content="#18181b">
+  <link rel="icon" href="media/logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 18V6"/><path d="m4 10 4-4 4 4"/><path d="M16 6v12"/><path d="m12 14 4 4 4-4"/></svg></span>
+        Portage
+      </a>
+      <div class="links">
+        <a class="navlink" href="index.html#features">Features</a>
+        <a class="navlink" href="index.html#matrix">What transfers</a>
+        <a href="https://github.com/pvrzz/Portage/" target="_blank" rel="noopener" class="navlink">GitHub</a>
+        <a class="cta" href="download.html">Download</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-head reveal">
+    <div class="wrap">
+      <h1>Privacy Policy</h1>
+      <p>Portage runs entirely on your device. Nothing is sent anywhere.</p>
+    </div>
+  </header>
+
+  <section style="padding-top: 20px;">
+    <div class="wrap prose reveal">
+      <p class="effective">Last updated: June 25, 2026</p>
+
+      <h2>The short version</h2>
+      <p>
+        Portage does not collect, transmit, store, sell, or share any of your data.
+        It has no analytics, no telemetry, no remote servers, and no third-party services.
+        Everything happens locally in your browser. The export file Portage produces is saved
+        to your local downloads folder; what you do with it from there is up to you.
+      </p>
+
+      <h2>What Portage reads from your browser</h2>
+      <p>
+        When you ask Portage to export your data, it reads the categories you select from your browser:
+      </p>
+      <ul>
+        <li><strong>Bookmarks</strong> — your full bookmark tree, including folders.</li>
+        <li><strong>History</strong> — pages you've visited, with timestamps.</li>
+        <li><strong>Cookies</strong> — site cookies, including authentication cookies, so you stay signed in after migrating.</li>
+        <li><strong>Open tabs</strong> — URLs of tabs open at the time of export.</li>
+        <li><strong>Sessions</strong> — recently closed tabs and windows.</li>
+        <li><strong>Reading list</strong> — pages saved to read later (Chrome only).</li>
+        <li><strong>Installed extensions</strong> — names and IDs only, used to generate a reinstall checklist. Portage does not read the data or behavior of other extensions.</li>
+      </ul>
+      <p>
+        This data is read only when you click an export action, only for the categories you check,
+        and only for as long as it takes to write the export file. Portage does not background-scan or
+        passively monitor any of it.
+      </p>
+
+      <h2>What Portage does with that data</h2>
+      <p>
+        Portage assembles the selected data into a single <code>.portage.json</code> file.
+        If you enable the optional encryption toggle, the file is encrypted with AES-256-GCM
+        using a passphrase you provide. Portage never stores, transmits, or has access to that passphrase
+        in any form — it exists only in memory during the export operation and is discarded immediately after.
+      </p>
+      <p>
+        The resulting file is saved to your browser's local downloads folder via the standard download API.
+        Portage has no ability to upload, sync, share, or otherwise move the file anywhere on its own.
+        Any further movement of that file — copying to a USB drive, sending it to yourself, uploading to cloud storage —
+        is an action you take outside of Portage.
+      </p>
+
+      <h2>What Portage does on import</h2>
+      <p>
+        When you import a <code>.portage.json</code> file, Portage decrypts it (if encrypted) and writes
+        the contents back into the destination browser using each browser's native APIs. The file you provide
+        is read from your local disk only; nothing about the file or its contents is transmitted.
+        After import, the in-memory copy of the bundle is wiped.
+      </p>
+
+      <h2>Network activity</h2>
+      <p>
+        Portage makes no network requests of any kind. There is no analytics endpoint, no telemetry,
+        no update check, no remote logging, no third-party SDK, and no embedded tracker.
+        You can verify this by inspecting the source code, by inspecting the extension files,
+        or by watching network activity in your browser's developer tools while using Portage.
+      </p>
+
+      <h2>Why each permission is requested</h2>
+      <ul>
+        <li><strong>bookmarks, history, cookies, tabs, sessions, readingList</strong> — to read each category during export and write it back on import.</li>
+        <li><strong>management</strong> — to list installed extensions so Portage can generate a reinstall checklist. Portage does not enable, disable, install, or uninstall extensions.</li>
+        <li><strong>Access your data for all websites</strong> (<code>&lt;all_urls&gt;</code>) — required by the browser cookies API to read cookies across sites during export. Portage does not read page content or inject scripts.</li>
+      </ul>
+
+      <h2>Children's privacy</h2>
+      <p>
+        Portage is not directed at children and does not knowingly collect any information from anyone,
+        including children. Because Portage collects no information at all, there is nothing to disclose,
+        delete, or restrict.
+      </p>
+
+      <h2>Changes to this policy</h2>
+      <p>
+        If this policy is ever updated, the revised version will be posted at this URL and the
+        "Last updated" date above will change. Because Portage has no telemetry, there is no in-app
+        notification system; substantive changes will be noted in the GitHub release notes for the
+        version that introduces them.
+      </p>
+
+      <h2>Open source</h2>
+      <p>
+        Portage is MIT-licensed and the complete source code is available at
+        <a href="https://github.com/pvrzz/Portage/" target="_blank" rel="noopener">github.com/pvrzz/Portage</a>.
+        Every claim in this policy can be verified against the source.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about this policy can be filed as an issue on the GitHub repository, or sent to
+        the email address listed on the GitHub profile of <a href="https://github.com/pvrzz" target="_blank" rel="noopener">pvrzz</a>.
+      </p>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="foot-inner">
+      <a class="brand" href="index.html">
+        <span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 18V6"/><path d="m4 10 4-4 4 4"/><path d="M16 6v12"/><path d="m12 14 4 4 4-4"/></svg></span>
+        Portage
+      </a>
+      <div class="spacer"></div>
+      <div class="links2">
+        <a href="https://github.com/pvrzz/Portage/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/pvrzz/Portage/releases" target="_blank" rel="noopener">Releases</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+      <span class="made">made by <a href="https://pvrz.lol/" target="_blank" rel="noopener">pvrz</a> <span class="heart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></span></span>
+    </div>
+  </footer>
+</body>
+</html>
