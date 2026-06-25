@@ -76,19 +76,30 @@
               <div class="ver" id="ver-firefox">Fetching latest...</div>
             </div>
           </div>
-          <a href="https://github.com/pvrzz/Portage/releases/latest" id="btn-firefox" class="btn btn-primary">Download for Firefox</a>
-          
+          <a href="https://github.com/pvrzz/Portage/releases/latest" id="btn-firefox" class="btn btn-primary">Install Portage (.xpi)</a>
+          <a href="https://github.com/pvrzz/Portage/releases/latest" id="btn-firefox-zip" class="btn btn-ghost">Download unsigned (.zip)</a>
+
           <div class="note">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
-            <span>Loaded as a temporary add-on. History titles and times are preserved.</span>
+            <span>Signed by Mozilla. Installs permanently — no developer mode needed.</span>
           </div>
-          
+
           <ul class="steps">
-            <li>Unzip the downloaded <code>portage_firefox.zip</code> file.</li>
-            <li>Navigate to <code>about:debugging#/runtime/this-firefox</code>.</li>
-            <li>Click <strong>Load Temporary Add-on...</strong></li>
-            <li>Select the <code>manifest.json</code> file inside the unzipped folder.</li>
+            <li>Click <strong>Install Portage (.xpi)</strong> above.</li>
+            <li>Firefox will prompt — click <strong>Continue to Installation</strong>.</li>
+            <li>Click <strong>Add</strong> to confirm.</li>
           </ul>
+
+          <details class="dev-toggle">
+            <summary>Developer install (unsigned source)</summary>
+            <ul class="steps">
+              <li>Download the unsigned <code>.zip</code> using the button above.</li>
+              <li>Unzip it somewhere you'll remember.</li>
+              <li>Navigate to <code>about:debugging#/runtime/this-firefox</code>.</li>
+              <li>Click <strong>Load Temporary Add-on...</strong> and select <code>manifest.json</code> from the unzipped folder.</li>
+            </ul>
+            <p class="dev-note">Temporary add-ons are removed when Firefox restarts.</p>
+          </details>
         </div>
 
       </div>
@@ -124,29 +135,35 @@
       const verFirefox = document.getElementById("ver-firefox");
       const btnChrome = document.getElementById("btn-chrome");
       const btnFirefox = document.getElementById("btn-firefox");
+      const btnFirefoxZip = document.getElementById("btn-firefox-zip");
 
       try {
         const res = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`);
         if (!res.ok) throw new Error("GitHub API failed");
-        
+
         const data = await res.json();
         const tag = data.tag_name || "Latest";
-        
+
         let chromeUrl = data.html_url;
-        let firefoxUrl = data.html_url;
+        let firefoxXpiUrl = data.html_url;
+        let firefoxZipUrl = data.html_url;
 
         if (data.assets && data.assets.length > 0) {
           const cAsset = data.assets.find(a => a.name === "portage_chrome.zip");
           if (cAsset) chromeUrl = cAsset.browser_download_url;
 
+          const xpiAsset = data.assets.find(a => a.name.endsWith(".xpi"));
+          if (xpiAsset) firefoxXpiUrl = xpiAsset.browser_download_url;
+
           const fAsset = data.assets.find(a => a.name === "portage_firefox.zip");
-          if (fAsset) firefoxUrl = fAsset.browser_download_url;
+          if (fAsset) firefoxZipUrl = fAsset.browser_download_url;
         }
 
         verChrome.textContent = tag;
         verFirefox.textContent = tag;
         btnChrome.href = chromeUrl;
-        btnFirefox.href = firefoxUrl;
+        btnFirefox.href = firefoxXpiUrl;
+        btnFirefoxZip.href = firefoxZipUrl;
 
       } catch (err) {
         console.warn("Could not fetch release data:", err);
