@@ -220,3 +220,15 @@ table.matrix td:first-child { font-weight: 600; }
   * { animation-duration: .001s !important; transition-duration: .001s !important; }
   html { scroll-behavior: auto; }
 }
+
+.prose { max-width: 760px; margin: 0 auto; padding: 20px 0 40px; }
+.prose .effective { color: var(--ink-500); font-size: 13.5px; margin-bottom: 28px; }
+.prose h2 { font-size: 22px; letter-spacing: -0.02em; margin-top: 36px; margin-bottom: 12px; font-weight: 700; }
+.prose h2:first-of-type { margin-top: 0; }
+.prose p { color: var(--ink-700); font-size: 15.5px; line-height: 1.7; margin-bottom: 14px; }
+.prose ul { margin: 8px 0 18px; padding-left: 22px; display: grid; gap: 8px; }
+.prose ul li { color: var(--ink-700); font-size: 15px; line-height: 1.65; }
+.prose ul li strong { color: var(--ink-800); }
+.prose code { font-family: var(--mono); font-size: 13px; background: var(--ink-100); padding: 1px 6px; border-radius: 5px; color: var(--ink-800); }
+.prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.prose a:hover { filter: brightness(.92); }
