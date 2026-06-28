@@ -49,19 +49,30 @@
               <div class="ver" id="ver-chrome">Fetching latest...</div>
             </div>
           </div>
-          <a href="https://github.com/pvrzz/Portage/releases/latest" id="btn-chrome" class="btn btn-primary">Download for Chrome</a>
-          
+          <a href="https://github.com/pvrzz/Portage/releases/latest" id="btn-chrome" class="btn btn-primary">Download Portage (.crx)</a>
+
           <div class="note">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            <span>Loaded as an unpacked extension. Data swap APIs are fully supported.</span>
+            <span>Enable Developer mode, then drag the <code>.crx</code> onto the extensions page.</span>
           </div>
-          
+
           <ul class="steps">
-            <li>Unzip the downloaded <code>portage_chrome.zip</code> file.</li>
             <li>Navigate to <code>chrome://extensions</code> in your URL bar.</li>
             <li>Enable <strong>Developer mode</strong> in the top right corner.</li>
-            <li>Click <strong>Load unpacked</strong> and select the unzipped folder.</li>
+            <li>Drag and drop the downloaded <code>.crx</code> file onto the page.</li>
+            <li>Click <strong>Add extension</strong> to confirm.</li>
           </ul>
+
+          <details class="dev-toggle">
+            <summary>Developer install (unpacked source)</summary>
+            <ul class="steps">
+              <li>Download the unpacked <code>.zip</code> using the button below.</li>
+              <li>Unzip it somewhere you'll remember.</li>
+              <li>Navigate to <code>chrome://extensions</code> and enable <strong>Developer mode</strong>.</li>
+              <li>Click <strong>Load unpacked</strong> and select the unzipped folder.</li>
+            </ul>
+            <a href="https://github.com/pvrzz/Portage/releases/latest" id="btn-chrome-zip" class="btn btn-ghost" style="margin-top:12px">Download unpacked (.zip)</a>
+          </details>
         </div>
 
         <div class="dl-card">
@@ -78,7 +89,6 @@
             </div>
           </div>
           <a href="https://github.com/pvrzz/Portage/releases/latest" id="btn-firefox" class="btn btn-primary" type="application/octet-stream" download>Download Portage (.xpi)</a>
-          <a href="https://github.com/pvrzz/Portage/releases/latest" id="btn-firefox-zip" class="btn btn-ghost">Download unsigned (.zip)</a>
 
           <div class="note">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
@@ -94,12 +104,13 @@
           <details class="dev-toggle">
             <summary>Developer install (unsigned source)</summary>
             <ul class="steps">
-              <li>Download the unsigned <code>.zip</code> using the button above.</li>
+              <li>Download the unsigned <code>.zip</code> using the button below.</li>
               <li>Unzip it somewhere you'll remember.</li>
               <li>Navigate to <code>about:debugging#/runtime/this-firefox</code>.</li>
               <li>Click <strong>Load Temporary Add-on...</strong> and select <code>manifest.json</code> from the unzipped folder.</li>
             </ul>
             <p class="dev-note">Temporary add-ons are removed when Firefox restarts.</p>
+            <a href="https://github.com/pvrzz/Portage/releases/latest" id="btn-firefox-zip" class="btn btn-ghost" style="margin-top:12px">Download unsigned (.zip)</a>
           </details>
         </div>
 
@@ -147,12 +158,16 @@
         const tag = data.tag_name || "Latest";
 
         let chromeUrl = data.html_url;
+        let chromeZipUrl = data.html_url;
         let firefoxXpiUrl = data.html_url;
         let firefoxZipUrl = data.html_url;
 
         if (data.assets && data.assets.length > 0) {
-          const cAsset = data.assets.find(a => a.name === "portage_chrome.zip");
-          if (cAsset) chromeUrl = cAsset.browser_download_url;
+          const crxAsset = data.assets.find(a => a.name.endsWith(".crx"));
+          if (crxAsset) chromeUrl = crxAsset.browser_download_url;
+
+          const cZipAsset = data.assets.find(a => a.name === "portage_chrome.zip");
+          if (cZipAsset) chromeZipUrl = cZipAsset.browser_download_url;
 
           const xpiAsset = data.assets.find(a => a.name.endsWith(".xpi"));
           if (xpiAsset) firefoxXpiUrl = xpiAsset.browser_download_url;
@@ -164,6 +179,7 @@
         verChrome.textContent = tag;
         verFirefox.textContent = tag;
         btnChrome.href = chromeUrl;
+        document.getElementById("btn-chrome-zip").href = chromeZipUrl;
         btnFirefox.href = firefoxXpiUrl;
         btnFirefoxZip.href = firefoxZipUrl;
 
