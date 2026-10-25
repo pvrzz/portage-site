@@ -7,13 +7,20 @@ File Name: site.js
 (function () {
   const KEY = "portage-site-theme";
   const root = document.documentElement;
-  const SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>';
-  const MOON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
+  root.classList.remove("no-js");
+
+  const SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>';
+  const MOON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
 
   function current() { try { return localStorage.getItem(KEY) || "system"; } catch { return "system"; } }
   function effective() { const m = current(); return m !== "system" ? m : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"); }
   function setMode(m) { if (m === "system") root.removeAttribute("data-mode"); else root.setAttribute("data-mode", m); try { localStorage.setItem(KEY, m); } catch {} updateIcon(); }
-  function updateIcon() { const b = document.getElementById("themeToggle"); if (b) b.innerHTML = effective() === "dark" ? SUN : MOON; }
+  function updateIcon() {
+    const b = document.getElementById("themeToggle"); if (!b) return;
+    const dark = effective() === "dark";
+    b.innerHTML = dark ? SUN : MOON;
+    b.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+  }
 
   const init = current();
   if (init !== "system") root.setAttribute("data-mode", init);
@@ -28,12 +35,44 @@ File Name: site.js
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); obs.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
+    const targets = document.querySelectorAll(".reveal, .reveal-group");
+    if ("IntersectionObserver" in window) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); obs.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+      targets.forEach((el) => obs.observe(el));
+    } else {
+      targets.forEach((el) => el.classList.add("in"));
+    }
 
     const y = document.getElementById("year");
     if (y) y.textContent = new Date().getFullYear();
+
+    loadLatestBuild();
   });
+
+  // Download page: point the "latest build" links at the newest GitHub release's zips.
+  // Falls back to the releases page if the API is unavailable or an asset is missing.
+  async function loadLatestBuild() {
+    const pills = document.querySelectorAll("[data-build-version]");
+    const links = document.querySelectorAll("[data-build-zip]");
+    if (!pills.length && !links.length) return;
+    const setPills = (text, state) => pills.forEach((p) => { p.textContent = text; p.dataset.state = state; });
+    try {
+      const res = await fetch("https://api.github.com/repos/pvrzz/Portage/releases/latest", { headers: { Accept: "application/vnd.github+json" } });
+      if (!res.ok) throw new Error("GitHub API " + res.status);
+      const rel = await res.json();
+      const version = ((rel.name || "") + " " + (rel.tag_name || "")).match(/v?\d+\.\d+(\.\d+)?/);
+      setPills(version ? (version[0].startsWith("v") ? version[0] : "v" + version[0]) : "Latest release", "ready");
+      const assets = rel.assets || [];
+      links.forEach((a) => {
+        const browser = a.dataset.buildZip;
+        const zip = assets.find((x) => /\.zip$/i.test(x.name) && x.name.toLowerCase().includes(browser));
+        a.href = zip ? zip.browser_download_url : rel.html_url;
+      });
+    } catch (err) {
+      console.warn("Could not load the latest release:", err);
+      setPills("Latest release", "ready");
+    }
+  }
 })();

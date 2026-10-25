@@ -4,7 +4,7 @@ Portage by pvrz
 https://github.com/pvrzz/Portage/
 File Name: privacy.html
 -->
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,40 +12,42 @@ File Name: privacy.html
   <title>Portage — Privacy Policy</title>
   <meta name="theme-color" content="#18181b">
   <link rel="icon" href="media/logo.png">
+  <link rel="preload" href="media/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
-  <script src="site.js" defer></script>
+  <script src="site.js"></script>
 </head>
 <body>
-  <nav class="nav">
+  <nav class="nav" aria-label="Main">
     <div class="nav-inner">
-      <a class="brand" href="index.html">
-        <span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 18V6"/><path d="m4 10 4-4 4 4"/><path d="M16 6v12"/><path d="m12 14 4 4 4-4"/></svg></span>
+      <a class="brand" href="index.html" aria-label="Portage home">
+        <span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 18V6"/><path d="m4 10 4-4 4 4"/><path d="M16 6v12"/><path d="m12 14 4 4 4-4"/></svg></span>
         Portage
       </a>
       <div class="links">
+        <a class="navlink" href="index.html#screens">How it works</a>
         <a class="navlink" href="index.html#features">Features</a>
         <a class="navlink" href="index.html#matrix">What transfers</a>
-        <a href="https://github.com/pvrzz/Portage/" target="_blank" rel="noopener" class="navlink">GitHub</a>
-        <a class="cta" href="download.html">Download</a>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+        <a class="navlink" href="https://github.com/pvrzz/Portage/" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-primary btn-sm cta" href="download.html">Download</a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme"></button>
       </div>
     </div>
   </nav>
 
-  <header class="page-head reveal">
+  <header class="page-head">
     <div class="wrap">
       <h1>Privacy Policy</h1>
       <p>Portage runs entirely on your device. Nothing is sent anywhere.</p>
     </div>
   </header>
 
-  <section style="padding-top: 20px;">
+  <main>
     <div class="wrap prose reveal">
-      <p class="effective">Last updated: June 25, 2026</p>
+      <p class="effective">Last updated: October 25, 2026</p>
 
       <h2>The short version</h2>
       <p>
-        Portage does not collect, transmit, store, sell, or share any of your data.
+        Portage does not collect, transmit, sell, or share any of your data.
         It has no analytics, no telemetry, no remote servers, and no third-party services.
         Everything happens locally in your browser. The export file Portage produces is saved
         to your local downloads folder; what you do with it from there is up to you.
@@ -62,7 +64,7 @@ File Name: privacy.html
         <li><strong>Open tabs</strong> — URLs of tabs open at the time of export.</li>
         <li><strong>Sessions</strong> — recently closed tabs and windows.</li>
         <li><strong>Reading list</strong> — pages saved to read later (Chrome only).</li>
-        <li><strong>Installed extensions</strong> — names and IDs only, used to generate a reinstall checklist. Portage does not read the data or behavior of other extensions.</li>
+        <li><strong>Installed extensions</strong> — each extension's name, ID, version, description, homepage link, whether it is enabled, and how it was installed, used to generate a reinstall checklist. Portage does not read the data or behavior of other extensions.</li>
       </ul>
       <p>
         This data is read only when you click an export action, only for the categories you check,
@@ -92,6 +94,13 @@ File Name: privacy.html
         After import, the in-memory copy of the bundle is wiped.
       </p>
 
+      <h2>What Portage stores</h2>
+      <p>
+        Only your appearance settings: light or dark mode and your accent color, saved in the
+        extension's own local storage on your device. Portage never saves your browsing data,
+        passphrases, or bundles in extension storage.
+      </p>
+
       <h2>Network activity</h2>
       <p>
         Portage makes no network requests of any kind. There is no analytics endpoint, no telemetry,
@@ -104,7 +113,7 @@ File Name: privacy.html
       <ul>
         <li><strong>bookmarks, history, cookies, tabs, sessions, readingList</strong> — to read each category during export and write it back on import.</li>
         <li><strong>management</strong> — to list installed extensions so Portage can generate a reinstall checklist. Portage does not enable, disable, install, or uninstall extensions.</li>
-        <li><strong>Access your data for all websites</strong> (<code>&lt;all_urls&gt;</code>) — required by the browser cookies API to read cookies across sites during export. Portage does not read page content or inject scripts.</li>
+        <li><strong>Access your data for all websites</strong> (<code>&lt;all_urls&gt;</code>) — required by the browser cookies API to read cookies across sites during export and set them again on import. Portage does not read page content or inject scripts.</li>
       </ul>
 
       <h2>Children's privacy</h2>
@@ -142,16 +151,17 @@ File Name: privacy.html
         the email address listed on the GitHub profile of <a href="https://github.com/pvrzz" target="_blank" rel="noopener">pvrzz</a>.
       </p>
     </div>
-  </section>
+  </main>
 
   <footer class="foot">
     <div class="foot-inner">
       <a class="brand" href="index.html">
-        <span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 18V6"/><path d="m4 10 4-4 4 4"/><path d="M16 6v12"/><path d="m12 14 4 4 4-4"/></svg></span>
+        <span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 18V6"/><path d="m4 10 4-4 4 4"/><path d="M16 6v12"/><path d="m12 14 4 4 4-4"/></svg></span>
         Portage
       </a>
       <div class="spacer"></div>
       <div class="links2">
+        <a href="download.html">Download</a>
         <a href="https://github.com/pvrzz/Portage/" target="_blank" rel="noopener">GitHub</a>
         <a href="https://github.com/pvrzz/Portage/releases" target="_blank" rel="noopener">Releases</a>
         <a href="privacy.html">Privacy</a>

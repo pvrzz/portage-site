@@ -1,0 +1,6 @@
+# Files Cloudflare should not publish as part of the site.
+wrangler.jsonc
+.gitignore
+.assetsignore
+.claude
+.tastemaker
